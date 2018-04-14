@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="app\lib\angular.min.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	  <script type="text/javascript" src="app/app.js"></script>
+	  <link rel="stylesheet" type="text/css" href="content/style.css?version=991">
+</head>
+<body ng-app="mymodule">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+       <div class="col-sm-10"><h2 class="text-center" style="color: white;">MyHotel</h2></div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="midpart"></div>
+<div style="width: 70%;margin: 0 auto;">
+	<h3>Enter City</h3>
+
+	<div class="col-xs-8" ng-controller="mycontroller">
+
+    <input class="form-control searchbox" id="ex1" type="text" name="searchbar" placeholder="Search..." ng-model="search"/>
+    <div id="dropdown">
+      <!-- <ul>
+        <li ng-repeat="ninja in ninjas">{{hiii}}</li>
+      </ul> -->
+    </div>
+    </div>
+     <div class="col-xs-1"><input type="submit" class="btn btn-info" value="Search"></div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+  function search(val1)
+  {if(val1==""){
+    document.getElementById("dropdown").innerHTML="";
+    return;
+  }
+  else{
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+
+      if (this.readyState == 4 && this.status == 200) {
+
+        document.getElementById("dropdown").innerHTML = this.responseText;  
+      }
+    };
+
+    xhttp.open("GET", "searchid.php?id="+val1, true);
+    xhttp.send();
+  }
+}
+
+</script>
