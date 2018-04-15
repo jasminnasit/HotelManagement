@@ -17,8 +17,14 @@
   <div class="container-fluid">
        <div class="col-sm-10"><h2 class="text-center" style="color: white;">MyHotel</h2></div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <?php
+      if(!isset($_COOKIE['user'])){
+        echo"
+      <li><a href=\"signup.php\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li>
+      <li><a href=\"login.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>
+      ";
+       }
+      ?>
     </ul>
   </div>
 </nav>
@@ -29,7 +35,7 @@
 
 	<div class="col-xs-8" ng-controller="mycontroller">
 
-    <input class="form-control searchbox" id="ex1" type="text" name="searchbar" placeholder="Search..." ng-model="search"/>
+    <input class="form-control searchbox" id="ex1" type="text" name="searchbar" placeholder="Search..." ng-model="search" onkeyup="search(this.value)"/>
     <div id="dropdown">
       <!-- <ul>
         <li ng-repeat="ninja in ninjas">{{hiii}}</li>
