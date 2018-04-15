@@ -2,6 +2,20 @@
 $cityname=$_REQUEST['cityname'];
 setcookie("city",$cityname,time()+3600);
 
+
+if(isset($_POST['bookbtn'])){
+       $hid=$_COOKIE['hid'];
+       $uid=$_COOKIE['user'];
+       $chkin=$_POST['chkin'];
+       $chkout=$_POST['chkout'];
+       $room=$_POST['roomselect'];
+        setcookie('chkin',$chkin,time()+3600);
+       $db=mysqli_connect("localhost","root","","hotel") or die();
+       mysqli_query($db,"INSERT INTO book VALUES('$uid','$hid','$chkin','$chkout','$room','0')");
+       echo "<script type='text/javascript'>alert('hotel booked');</script>";
+       header('location:index.php');
+}
+
 ?>
 
 
@@ -69,14 +83,14 @@ setcookie("city",$cityname,time()+3600);
 							<h4 class="modal-title">Book Hotel</h4>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
-                       <form class="bookfrm" method="post">
+                       <form class="bookfrm" action="newpage.php?cityname=" method="post">
 						<!-- Modal body -->
 						<div class="modal-body">
 							
 								<p>Check-in Date:</p>
-								 <input id="datepicker" width="276" ng-model="start"/>
+								 <input id="datepicker" width="276" ng-model="start" name="chkin" />
 								<p>Check-out Date:</p>
-								 <input id="datepicker" width="276" ng-model="end"/>
+								 <input id="datepicker1" width="276" ng-model="end" name="chkout" />
 								<select name="roomselect">
 									<option value="sprice" selected>Single Room</option>
 									<option value="dprice">Double Room</option>
@@ -87,7 +101,7 @@ setcookie("city",$cityname,time()+3600);
 
 						<!-- Modal footer -->
 						<div class="modal-footer">
-							<input type="button" class="btn btn-danger" data-dismiss="modal" name="bookbtn">Book</button>
+							<input type="submit" class="btn btn-danger" name="bookbtn" value="book"></button>
 						</div>
 
 					</form>
@@ -103,7 +117,8 @@ setcookie("city",$cityname,time()+3600);
 	<script type="text/javascript">
 		$(document).on("click", ".open-AddBookDialog", function () {
 			var myBookId = $(this).data('id');
-			$(".boofrm").action("bookhotel.php?hid="+myBookId);
+			document.cookie = "hid="+myBookId;
+			//$(".boofrm").action("bookhotel.php?hid="+myBookId);
 			console.log(myBookId);
      // As pointed out in comments, 
      // it is superfluous to have to manually call the modal.
@@ -111,6 +126,9 @@ setcookie("city",$cityname,time()+3600);
  });
 
 		  $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+		  $('#datepicker1').datepicker({
             uiLibrary: 'bootstrap4'
         });
 </script>
