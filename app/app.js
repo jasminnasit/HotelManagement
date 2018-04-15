@@ -1,6 +1,6 @@
 var mymodule=angular.module('mymodule',[]);
 
-mymodule.controller('mycontroller',['$scope','$http',function($scope,$htt){
+mymodule.controller('mycontroller',['$scope','$http',function($scope,$http){
 
 
   // $scope.ninjas=[
@@ -18,8 +18,8 @@ mymodule.controller('mycontroller',['$scope','$http',function($scope,$htt){
 //     var latitude = results[0].geometry.location.latitude;
 //     var longitude = results[0].geometry.location.longitude;
 //     alert(latitude);
-//     } 
-// }); 
+//     }
+// });
   // $scope.ninjas=[
   // {
   //   name:"surat",
@@ -31,9 +31,9 @@ mymodule.controller('mycontroller',['$scope','$http',function($scope,$htt){
   // }
   // ];
 
-//   $http.get("test.php").then(function(response){
-//     $scope.ninjas=response.data;
-//     console.log($scope.ninjas);
-//   });
+  $http.get("test.php").then(function(response){
+    $scope.ninjas=response.data;
+    console.log($scope.ninjas);
+  });
 
-// }]);
+ }]);
