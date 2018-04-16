@@ -15,7 +15,12 @@ if(isset($_POST['bookbtn'])){
        echo "<script type='text/javascript'>alert('hotel booked');</script>";
        header('location:index.php');
 }
-
+if(isset($_POST['lgbtn'])){
+	setcookie("city",0,time()-3600);
+	setcookie('user',0,time()-3600);
+	setcookie('hid',0,time()-3600);
+	header('location:index.php');
+}
 ?>
 
 
@@ -44,23 +49,35 @@ if(isset($_POST['bookbtn'])){
 			<div class="col-sm-9"><h2 class="text-center" style="color: white;">MyHotel</h2></div>
 			<form class="form-inline" action="/action_page.php">
 				<input class="form-control mr-sm-2" type="text" placeholder="Search" ng-model="hname">
-				<button class="btn btn-success" type="submit">Search</button>
+				
 			</form>
+			<form action="newpage.php" method="post"><input class="btn btn-success" type="submit" name="lgbtn" value="logout"></input></form>
 		</div>
 	</nav>
 	<div class="maindisplay" >
 		<div class="col-sm-3 filter">
-			<select ng-module="selectroom">
-				<option value="singleroom" selected>Single Room</option>
-				<option value="doubleroom">Double Room</option>
-				<option value="familyroom">Family Room</option>
+			<p>Room Available</p>
+			<select ng-model="selectroom">
+				<option value="sroomo" selected>Single Room</option>
+				<option value="droomo">Double Room</option>
+				<option value="froomo">Family Room</option>
+			</select>
+			<br>
+			<br>
+           <p>
+           	Sort By Price
+           </p>
+			<select ng-model="selecroom">
+				<option value="sprice" selected>Single Room</option>
+				<option value="dprice">Double Room</option>
+				<option value="fprice">Family Room</option>
 			</select>
 		</div>
 
 
 		<div class="col-sm-9 hotel">
 			
-			<div class="card w-75" style="margin: 0 auto;" ng-repeat="ninja in ninjas|filter:hname">
+			<div class="card w-75" style="margin: 0 auto;" ng-repeat="ninja in ninjas|filter:hname|orderBy:selectroom|orderBy:selecroom">
 				<div class="card-body"  >
 					<img src="Images/hotels-4.jpg" class="w-25" style="float: right;">
 					<h5 class="card-title">{{ninja.name}}</h5>
